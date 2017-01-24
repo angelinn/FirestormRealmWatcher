@@ -10,7 +10,7 @@ namespace RealmWatcher
 {
     public class Watcher
     {
-        public void Watch(Action<RealmInfo> callback)
+        public async Task Watch(Action<RealmInfo> callback)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd(USER_AGENT);
@@ -32,7 +32,7 @@ namespace RealmWatcher
 
                 callback?.Invoke(legion);
 
-                Task.Delay(10000);
+                await Task.Delay(10000);
             }
 
         }

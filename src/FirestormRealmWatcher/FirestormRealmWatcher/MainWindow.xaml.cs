@@ -38,8 +38,13 @@ namespace FirestormRealmWatcher
         }
 
         private void UpdateUI(RealmInfo legion)
-        {
-
+        {   
+            Dispatcher.Invoke(() =>
+            {
+                txtRealm.Text = legion.Name;
+                txtStatus.Text = legion.Status;
+                txtUpdated.Text = $"Последна проверка: {DateTime.Now.ToString()}";
+            }); 
         }
     }
 }

@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirestormRealmWatcher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Aradya" Height="350" Width="525">
+    
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="Images/logo.png"  />
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Name="txtRealm" FontSize="48"/>
+            <TextBlock Name="txtStatus" FontSize="24" />
+
+            <TextBlock Name="txtUpdated" />
+        </StackPanel>
+
     </Grid>
 </Window>
