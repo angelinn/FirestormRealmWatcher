@@ -5,22 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirestormRealmWatcher"
         mc:Ignorable="d"
-        Title="Aradya" Height="350" Width="525">
-    
+        Title="Aradya" Height="350" Width="525" Background="#EFEFEF">
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="3*" />
-        </Grid.ColumnDefinitions>
+        <Grid Margin="10" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
 
-        <Image Source="Images/logo.png"  />
+            <Image Source="Images/logo.png" />
+            <GroupBox Grid.Column="1" Header="Статус">
+                <Border Padding="5">
+                    <StackPanel>
+                        <TextBlock Name="txtRealm" FontSize="48"/>
+                        <TextBlock Name="txtStatus" FontSize="24" />
 
-        <StackPanel Grid.Column="1">
-            <TextBlock Name="txtRealm" FontSize="48"/>
-            <TextBlock Name="txtStatus" FontSize="24" />
+                        <TextBlock Name="txtUpdated" />
 
-            <TextBlock Name="txtUpdated" />
-        </StackPanel>
-
+                        <TextBlock Name="txtLog" TextWrapping="WrapWithOverflow" />
+                    </StackPanel>
+                </Border>
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>

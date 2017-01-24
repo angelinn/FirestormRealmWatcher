@@ -44,7 +44,14 @@ namespace FirestormRealmWatcher
                 txtRealm.Text = legion.Name;
                 txtStatus.Text = legion.Status;
                 txtUpdated.Text = $"Последна проверка: {DateTime.Now.ToString()}";
+
+                if (lastStatus != legion.Status)
+                    txtLog.Text += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString()}\n";
+
+                lastStatus = legion.Status;
             }); 
         }
+
+        private string lastStatus;
     }
 }
