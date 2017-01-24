@@ -43,10 +43,10 @@ namespace FirestormRealmWatcher
             {
                 txtRealm.Text = legion.Name;
                 txtStatus.Text = legion.Status;
-                txtUpdated.Text = $"Последна проверка: {DateTime.Now.ToString()}";
+                txtUpdated.Text = $"Последна проверка: {DateTime.Now.ToString("t")}";
 
-                if (lastStatus != legion.Status)
-                    txtLog.Text += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString()}\n";
+                if (lastStatus != legion.Status && !String.IsNullOrEmpty(lastStatus))
+                    txtLog.Text += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString("t")}\n";
 
                 lastStatus = legion.Status;
             }); 
