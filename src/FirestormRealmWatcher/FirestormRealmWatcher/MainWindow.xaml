@@ -8,25 +8,30 @@
         Title="Aradya" Height="350" Width="525" Background="#EFEFEF">
 
     <Grid>
-        <Grid Margin="10" >
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <Image Source="Images/logo.png" />
-            <GroupBox Grid.Column="1" Header="Статус">
+            <Image Source="Images/logo.png" Grid.RowSpan="2" />
+            <GroupBox Grid.Column="1" Grid.Row="0" Header="Статус">
                 <Border Padding="5">
                     <StackPanel>
-                        <TextBlock Name="txtRealm" FontSize="48"/>
-                        <TextBlock Name="txtStatus" FontSize="24" />
+                        <TextBlock FontSize="48" Text="{Binding RealmName}" />
+                        <TextBlock FontSize="24" Text="{Binding Status}" />
 
-                        <TextBlock Name="txtUpdated" />
+                        <TextBlock Text="{Binding Updated}"/>
 
-                        <TextBlock Name="txtLog" TextWrapping="WrapWithOverflow" />
+                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Log}" />
                     </StackPanel>
                 </Border>
             </GroupBox>
+            <Button Grid.Row="1" Grid.Column="1" Content="Изход" Width="70" HorizontalAlignment="Right" Margin="0,5,0,0" />
         </Grid>
     </Grid>
 </Window>

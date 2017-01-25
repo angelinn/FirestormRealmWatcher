@@ -1,4 +1,5 @@
-﻿using RealmWatcher;
+﻿using FirestormRealmWatcher.ViewModels;
+using RealmWatcher;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using NotifyIcon = System.Windows.Forms.NotifyIcon;
+
 namespace FirestormRealmWatcher
 {
     /// <summary>
@@ -21,37 +24,24 @@ namespace FirestormRealmWatcher
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Watcher watcher;
+        public RealmStatusViewModel RealmStatusViewModel { get; set; } = new RealmStatusViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            icon.ShowBalloonTip(5000, "Watcher has started", "Simple text", System.Windows.Forms.ToolTipIcon.Info);
+
+            DataContext = RealmStatusViewModel;
+            Closing += OnMainWindowClosing;
         }
 
-        protected override void OnActivated(EventArgs e)
+        private void OnMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (watcher == null)
-            {
-                watcher = new Watcher();
-
-                Task.Run(() => watcher.Watch(UpdateUI));
-            }
+            e.Cancel = true;
+            Visibility = Visibility.Hidden;
         }
 
-        private void UpdateUI(RealmInfo legion)
-        {   
-            Dispatcher.Invoke(() =>
-            {
-                txtRealm.Text = legion.Name;
-                txtStatus.Text = legion.Status;
-                txtUpdated.Text = $"Последна проверка: {DateTime.Now.ToString("t")}";
+        private NotifyIcon icon = new NotifyIcon();
 
-                if (lastStatus != legion.Status && !String.IsNullOrEmpty(lastStatus))
-                    txtLog.Text += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString("t")}\n";
-
-                lastStatus = legion.Status;
-            }); 
-        }
-
-        private string lastStatus;
     }
 }
