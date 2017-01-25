@@ -10,6 +10,24 @@ namespace FirestormRealmWatcher.ViewModels
 {
     public class RealmStatusViewModel : BaseViewModel
     {
+        public RealmStatusViewModel()
+        {
+            Task.Run(() => watcher.Watch(UpdateUI));
+        }
+
+        public void UpdateUI(RealmInfo legion)
+        {
+            RealmName = legion.Name;
+            Status = legion.Status;
+            Updated = $"Последна проверка: {DateTime.Now.ToString("t")}";
+
+            if (lastStatus != legion.Status && !String.IsNullOrEmpty(lastStatus))
+                Log += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString("t")}\n";
+
+            lastStatus = legion.Status;
+        }
+        
+
         private string realmName;
         public string RealmName
         {
@@ -76,23 +94,6 @@ namespace FirestormRealmWatcher.ViewModels
                     OnPropertyChanged();
                 }
             }
-        }
-
-        public RealmStatusViewModel()
-        {
-            Task.Run(() => watcher.Watch(UpdateUI));
-        }
-
-        public void UpdateUI(RealmInfo legion)
-        {
-            RealmName = legion.Name;
-            Status = legion.Status;
-            Updated = $"Последна проверка: {DateTime.Now.ToString("t")}";
-
-            if (lastStatus != legion.Status && !String.IsNullOrEmpty(lastStatus))
-                Log += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString("t")}\n";
-
-            lastStatus = legion.Status;
         }
 
         private Watcher watcher = new Watcher();

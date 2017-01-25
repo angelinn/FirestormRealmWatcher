@@ -29,10 +29,18 @@ namespace FirestormRealmWatcher
         public MainWindow()
         {
             InitializeComponent();
-            icon.ShowBalloonTip(5000, "Watcher has started", "Simple text", System.Windows.Forms.ToolTipIcon.Info);
 
+            icon.Icon = new System.Drawing.Icon("tray_16.ico");
+            icon.Visible = true;
+            
             DataContext = RealmStatusViewModel;
             Closing += OnMainWindowClosing;
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                icon.ShowBalloonTip(5000, $"{RealmStatusViewModel.RealmName} е онлайн.", " ", System.Windows.Forms.ToolTipIcon.None);
+            });
         }
 
         private void OnMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -41,7 +49,11 @@ namespace FirestormRealmWatcher
             Visibility = Visibility.Hidden;
         }
 
-        private NotifyIcon icon = new NotifyIcon();
+        private void OnExitClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
+        private NotifyIcon icon = new NotifyIcon();
     }
 }
