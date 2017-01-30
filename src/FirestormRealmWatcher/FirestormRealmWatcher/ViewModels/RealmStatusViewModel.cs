@@ -22,11 +22,17 @@ namespace FirestormRealmWatcher.ViewModels
             Updated = $"Последна проверка: {DateTime.Now.ToString("t")}";
 
             if (lastStatus != legion.Status && !String.IsNullOrEmpty(lastStatus))
+            {
                 Log += $"Сървърът стана {legion.Status} на {DateTime.Now.ToString("t")}\n";
 
+                Callback?.Invoke($"{RealmName} е {Status}");
+            }
+            
             lastStatus = legion.Status;
         }
-        
+
+        public Action<string> Callback { get; set; }
+
 
         private string realmName;
         public string RealmName
