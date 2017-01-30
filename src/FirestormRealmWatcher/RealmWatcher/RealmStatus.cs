@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace RealmWatcher
 {
-    public enum RealmStatus
+    public class RealmStatus
     {
-        None = -1,
-        Offline,
-        Online
-    }
+        public string Status { get; set; }
+        public string Since { get; set; }
+        public bool AfterCrash { get; set; } = true;
+    }    
 }
+

@@ -56,6 +56,11 @@ namespace FirestormRealmWatcher
             Application.Current.Shutdown();
         }
 
+        private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            RealmStatusViewModel.SetUpdateInterval((sender as TextBox).Text);
+        }
+
         private NotifyIcon icon = new NotifyIcon();
     }
 }
