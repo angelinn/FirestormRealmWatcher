@@ -1,4 +1,5 @@
 ﻿using RealmWatcher;
+using RealmWatcher.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -161,7 +162,7 @@ namespace FirestormRealmWatcher.ViewModels
             }
         }
 
-        private Watcher watcher = new Watcher();
+        private IRealmWatcher watcher = new HttpRealmWatcher();
         private string lastStatus;
     }
 }

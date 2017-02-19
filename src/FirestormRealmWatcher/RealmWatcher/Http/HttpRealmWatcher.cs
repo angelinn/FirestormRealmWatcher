@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealmWatcher
+namespace RealmWatcher.Http
 {
-    public class Watcher
+    public class HttpRealmWatcher : IRealmWatcher
     {
         private int updateIntervalMs = 60000;
         public int UpdateIntervalMs
