@@ -1,5 +1,6 @@
 ﻿using RealmWatcher;
 using RealmWatcher.Http;
+using RealmWatcher.Tcp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace FirestormRealmWatcher.ViewModels
 
         private RealmStatus ParseRealmStatus(string status)
         {
-            if (status == "offline")
+            if (status == "offline" || status == "online")
                 return new RealmStatus { Status = status };
 
             string[] split = status.Split(' ');
@@ -122,7 +123,12 @@ namespace FirestormRealmWatcher.ViewModels
             get
             {
                 if (status?.Status == "online")
+                {
+                    if (String.IsNullOrEmpty(status.Since))
+                        return status.Status;
+
                     return $"{status.Status} от {status.Since}";
+                }
 
                 return $"{status?.Status}";
             }
@@ -162,7 +168,7 @@ namespace FirestormRealmWatcher.ViewModels
             }
         }
 
-        private IRealmWatcher watcher = new HttpRealmWatcher();
+        private IRealmWatcher watcher = new TCPRealmWatcher();
         private string lastStatus;
     }
 }
