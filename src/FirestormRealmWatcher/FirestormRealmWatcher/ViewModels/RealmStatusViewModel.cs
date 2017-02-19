@@ -167,7 +167,7 @@ namespace FirestormRealmWatcher.ViewModels
             }
         }
 
-        private IRealmWatcher watcher = new TCPRealmWatcher();
+        private SylvanasWatcher watcher = new TCPRealmWatcher();
         private string lastStatus;
     }
 }
