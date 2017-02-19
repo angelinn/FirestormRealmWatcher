@@ -10,7 +10,6 @@ namespace RealmWatcher
     {
         public string Status { get; set; }
         public string Since { get; set; }
-        public bool AfterCrash { get; set; } = true;
     }    
 }
 

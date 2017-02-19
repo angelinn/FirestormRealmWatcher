@@ -24,11 +24,9 @@ namespace FirestormRealmWatcher.ViewModels
             Status = ParseRealmStatus(legion.Status);
             Updated = $"Последна проверка: {DateTime.Now.ToString("HH:mm:ss")}";
 
-            if (lastStatus == "online" && lastStatus != legion.Status && !String.IsNullOrEmpty(lastStatus) && Status.AfterCrash)
+            if (lastStatus == "online" && lastStatus == "offline")
             {
                 Log += $"Сървърът стана {Status.Status} в {DateTime.Now.ToString("t")}\n";
-                Status.AfterCrash = false;
-
                 Callback?.Invoke($"{RealmName} е {Status.Status}");
             }
 
@@ -56,9 +54,6 @@ namespace FirestormRealmWatcher.ViewModels
                     Status = split[0],
                     Since = $"{split[2]} {(split.Length > 3 ? split[3] : String.Empty)} {(split.Length > 4 ? split[4] : String.Empty)}",
                 };
-
-                if (status.Length > 3)
-                    realmStatus.AfterCrash = false;
 
                 return realmStatus;
             }
