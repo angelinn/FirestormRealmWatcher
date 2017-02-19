@@ -10,7 +10,7 @@ namespace RealmWatcher.Tcp
 {
     public class TCPRealmWatcher : SylvanasWatcher
     {
-        public override RealmInfo GetRealmInfo()
+        protected override RealmInfo GetRealmInfo()
         {
             RealmInfo legion = new RealmInfo
             {

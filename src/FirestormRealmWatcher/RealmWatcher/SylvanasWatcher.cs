@@ -41,7 +41,7 @@ namespace RealmWatcher
             }
         }
 
-        public abstract RealmInfo GetRealmInfo();
+        protected abstract RealmInfo GetRealmInfo();
 
         private CancellationTokenSource waitToken = new CancellationTokenSource();
     }

@@ -17,7 +17,7 @@ namespace RealmWatcher.Http
                                         .First();
         }
 
-        public override RealmInfo GetRealmInfo()
+        protected override RealmInfo GetRealmInfo()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd(USER_AGENT);
