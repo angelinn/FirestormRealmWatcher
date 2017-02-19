@@ -29,7 +29,6 @@ namespace RealmWatcher.Http
 
             return new RealmInfo
             {
-                Name = GetNodeByClass(legionInfo, "span", "name").InnerText.Trim(),
                 Players = GetNodeByClass(legionInfo, "div", "players").InnerText.Trim(),
                 Status = GetNodeByClass(legionInfo, "div", "realm_top").Descendants("span").First().InnerText.Trim()
             };

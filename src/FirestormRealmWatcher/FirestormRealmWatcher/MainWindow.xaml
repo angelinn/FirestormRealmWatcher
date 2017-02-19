@@ -28,7 +28,7 @@
                 <Border Padding="5">
                     <DockPanel>
                         <StackPanel DockPanel.Dock="Top">
-                            <TextBlock FontSize="32" Text="{Binding RealmName}" />
+                            <TextBlock FontSize="32" Text="Sylvanas" />
                             <TextBlock FontSize="18" Text="{Binding StatusString}" />
 
                             <TextBlock Text="{Binding Updated}" />

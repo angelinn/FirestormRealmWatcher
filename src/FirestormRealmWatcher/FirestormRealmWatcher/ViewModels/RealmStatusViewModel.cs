@@ -20,14 +20,13 @@ namespace FirestormRealmWatcher.ViewModels
 
         public void UpdateUI(RealmInfo legion)
         {
-            RealmName = legion.Name;
             Status = ParseRealmStatus(legion.Status);
             Updated = $"Последна проверка: {DateTime.Now.ToString("HH:mm:ss")}";
 
             if (Status.Status == "online" && lastStatus == "offline")
             {
                 Log += $"Сървърът стана {Status.Status} в {DateTime.Now.ToString("t")}\n";
-                Callback?.Invoke($"{RealmName} е {Status.Status}");
+                Callback?.Invoke($"Sylvanas е {Status.Status}");
             }
             else if (Status.Status == "offline" && lastStatus == "online")
             {
@@ -79,23 +78,6 @@ namespace FirestormRealmWatcher.ViewModels
             {
                 updateSeconds = value;
                 OnPropertyChanged();
-            }
-        }
-
-        private string realmName;
-        public string RealmName
-        {
-            get
-            {
-                return realmName;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    realmName = value;
-                    OnPropertyChanged();
-                }
             }
         }
 
@@ -166,7 +148,7 @@ namespace FirestormRealmWatcher.ViewModels
                 }
             }
         }
-
+        
         private SylvanasWatcher watcher = new TCPRealmWatcher();
         private string lastStatus;
     }

@@ -12,17 +12,14 @@ namespace RealmWatcher.Tcp
     {
         protected override RealmInfo GetRealmInfo()
         {
-            RealmInfo legion = new RealmInfo
-            {
-                Name = "Sylvanas",
-            };
+            RealmInfo legion = new RealmInfo();
 
             try
             {
-                TcpClient tcpClient = new TcpClient();
-
-                tcpClient.Connect(WORLD_SERVER_URL, WORLD_SERVER_PORT);
-                tcpClient.Close();
+                using (TcpClient tcpClient = new TcpClient())
+                {
+                    tcpClient.Connect(WORLD_SERVER_URL, WORLD_SERVER_PORT);
+                }
 
                 legion.Status = "online";
             }

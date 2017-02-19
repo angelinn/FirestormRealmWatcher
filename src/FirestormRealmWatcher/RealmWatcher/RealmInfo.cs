@@ -8,7 +8,6 @@ namespace RealmWatcher
 {
     public class RealmInfo
     {
-        public string Name { get; set; }
         public string Players { get; set; }
         public string Status { get; set; }
     }
